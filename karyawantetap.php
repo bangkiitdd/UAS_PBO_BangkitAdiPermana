@@ -3,7 +3,6 @@
 require_once 'Karyawan.php';
 
 class KaryawanTetap extends Karyawan {
-    // Atribut tambahan spesifik anak
     private $tunjanganKesehatan;
     private $opsiSahamID;
 
@@ -13,21 +12,20 @@ class KaryawanTetap extends Karyawan {
         $this->opsiSahamID = $opsiSahamID;
     }
 
-    // Implementasi Method Abstrak 1: Hitung Gaji Bersih
+    // =========================================================================
+    // METHOD OVERRIDING (Polimorfisme)
+    // =========================================================================
     public function hitungGajiBersih() {
-        // Gaji Tetap = (Hari kerja * gaji dasar) + Tunjangan Kesehatan
-        return 0;
+        // Mendapatkan tambahan tunjangan kesehatan/keluarga yang besarnya bervariasi
+        return ($this->hari_kerja_masuk * $this->gajiDasarPerHari) + $this->tunjanganKesehatan;
     }
 
-    // Implementasi Method Abstrak 2: Tampilkan Profil
     public function tampilkanProfilKaryawan() {
         echo "<h3>Profil Karyawan Tetap</h3>";
         echo "ID Karyawan: " . $this->id_karyawan . "<br>";
         echo "Nama: " . $this->nama_karyawan . "<br>";
         echo "Departemen: " . $this->departemen . "<br>";
-        echo "Opsi Saham ID: " . $this->opsiSahamID . "<br>";
-        echo "Tunjangan Kesehatan: Rp " . number_format($this->tunjanganKesehatan, 0, ',', '.') . "<br>";
-        echo "Gaji Bersih Bulan Ini: Rp " . number_format($this->hitungGajiBersih(), 0, ',', '.') . "<br>";
+        echo "Gaji Bersih: Rp " . number_format($this->hitungGajiBersih(), 0, ',', '.') . "<br>";
         echo "<hr>";
     }
 }
